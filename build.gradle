@@ -43,12 +43,13 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310'
     implementation group: 'com.squareup.okhttp3', name:'okhttp', version:'4.10.0'
 
-    implementation group: 'org.knowm.xchange', name: 'xchange-binance', version: '5.0.9'
+    implementation group: 'org.knowm.xchange', name: 'xchange-binance', version: '5.0.13'
     // 新增
-    implementation group: 'org.knowm.xchange', name: 'xchange-ftx', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-okex', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-stream-ftx', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-stream-binance', version: '5.0.9'
+    implementation group: 'org.knowm.xchange', name: 'xchange-ftx', version: '5.0.13'
+    implementation group: 'org.knowm.xchange', name: 'xchange-okex', version: '5.0.13'
+    implementation group: 'org.knowm.xchange', name: 'xchange-ascendex', version: '5.0.13'
+    implementation group: 'org.knowm.xchange', name: 'xchange-stream-ftx', version: '5.0.13'
+    implementation group: 'org.knowm.xchange', name: 'xchange-stream-binance', version: '5.0.13'
     //
 
     implementation group: 'com.github.seratch', name: 'jslack', version: '3.4.2'
