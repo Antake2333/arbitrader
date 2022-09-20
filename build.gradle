@@ -43,16 +43,13 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310'
     implementation group: 'com.squareup.okhttp3', name:'okhttp', version:'4.10.0'
 
-    implementation group: 'org.knowm.xchange', name: 'xchange-quoine', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-stream-kraken', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-bitflyer', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-stream-coinbasepro', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-cexio', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-poloniex', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-stream-gemini', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-bitstamp', version: '5.0.9'
-    implementation group: 'org.knowm.xchange', name: 'xchange-cobinhood', version: '5.0.9'
     implementation group: 'org.knowm.xchange', name: 'xchange-binance', version: '5.0.9'
+    // 新增
+    implementation group: 'org.knowm.xchange', name: 'xchange-ftx', version: '5.0.9'
+    implementation group: 'org.knowm.xchange', name: 'xchange-okex', version: '5.0.9'
+    implementation group: 'org.knowm.xchange', name: 'xchange-stream-ftx', version: '5.0.9'
+    implementation group: 'org.knowm.xchange', name: 'xchange-stream-binance', version: '5.0.9'
+    //
 
     implementation group: 'com.github.seratch', name: 'jslack', version: '3.4.2'
     implementation group: 'javax.websocket', name: 'javax.websocket-api', version: '1.1'
@@ -67,7 +64,7 @@ dependencies {
 }
 
 docker {
-    name 'agonyforge/arbitrader'
+    name 'antake/arbitrader'
     dockerfile file('src/main/docker/local/Dockerfile')
     files tasks.bootJar.outputs
 }

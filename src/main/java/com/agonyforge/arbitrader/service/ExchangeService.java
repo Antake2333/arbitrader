@@ -89,11 +89,11 @@ public class ExchangeService {
      * This is a kind of hacky workaround for the fact that Arbitrader was written assuming everyone would have USD
      * as their "main" currency. If you have configured a different "home currency" for an exchange, such as USDC or
      * EUR, this method translates USD into that currency instead and smooths over the USD assumptions we have made.
-     *
+     * <p>
      * This is OK for the time being but the places where USD is hard coded should eventually be replaced by a
      * configuration that lets you set a global default fiat currency.
      *
-     * @param exchange An Exchange.
+     * @param exchange     An Exchange.
      * @param currencyPair A CurrencyPair.
      * @return A new CurrencyPair where USD has been replaced with the home currency for that Exchange.
      */
@@ -118,7 +118,7 @@ public class ExchangeService {
                 final Set<String> cryptoCoinsFromTradingPairs = getCryptoCoinsFromTradingPairs(exchange);
                 if (!cryptoCoinsFromTradingPairs.isEmpty()) {
                     cryptoCoinsFromTradingPairs.forEach(s -> LOGGER.error("Exchange {} is configured to trade with {} but the wallet for this coin is not empty! " +
-                        "As a safety measure this is not allowed. You can either sell your coins or remove this coin from any trading pair for this exchange",
+                            "As a safety measure this is not allowed. You can either sell your coins or remove this coin from any trading pair for this exchange",
                         exchange.getExchangeSpecification().getExchangeName(), s)
                     );
 
@@ -199,8 +199,7 @@ public class ExchangeService {
                 convertExchangePair(exchange, CurrencyPair.BTC_USD),
                 tradingFee.getTradeFee(),
                 tradingFee.getMarginFee().get().add(tradingFee.getTradeFee()));
-        }
-        else {
+        } else {
             LOGGER.info("{} {} trading fee: {}",
                 exchange.getExchangeSpecification().getExchangeName(),
                 convertExchangePair(exchange, CurrencyPair.BTC_USD),
@@ -214,7 +213,7 @@ public class ExchangeService {
      *
      * @param exchange The Exchange to query.
      * @param currency The Currency to query.
-     * @param scale The scale of the result.
+     * @param scale    The scale of the result.
      * @return The balance for the given currency on the given exchange with the given scale.
      * @throws IOException when we can't talk to the exchange.
      */
@@ -261,7 +260,10 @@ public class ExchangeService {
             .values()
             .stream()
             .flatMap(wallet -> wallet.getBalances().entrySet().stream())
+            // 过滤非计价币种
             .filter(currencyBalanceEntry -> currencyBalanceEntry.getKey() != homeCurrency)
+            // 过滤total大于0的才算有
+            .filter(currencyBalanceEntry -> currencyBalanceEntry.getValue().getTotal().compareTo(new BigDecimal("0.0")) > 0)
             .filter(currencyBalanceEntry -> {
                 CurrencyPair pair = new CurrencyPair(currencyBalanceEntry.getValue().getCurrency(), homeCurrency);
                 Optional<CurrencyPairMetaData> metaDataOptional = Optional.ofNullable(exchange
@@ -309,9 +311,9 @@ public class ExchangeService {
     /**
      * Get the fee for using an exchange.
      *
-     * @param exchange The Exchange to query.
+     * @param exchange     The Exchange to query.
      * @param currencyPair The CurrencyPair, in case fees vary by pair.
-     * @param isQuiet true if we should suppress error messages that could get annoying if they are too frequent.
+     * @param isQuiet      true if we should suppress error messages that could get annoying if they are too frequent.
      * @return The fee expressed as a percentage, ie. 0.0016 for 0.16%
      */
     public ExchangeFee getExchangeFee(Exchange exchange, CurrencyPair currencyPair, boolean isQuiet) {
@@ -410,12 +412,10 @@ public class ExchangeService {
         if (exchangeMetadata.getMargin()) {
             if (exchangeMetadata.getMarginFeeOverride() != null) {
                 marginFee = exchangeMetadata.getMarginFeeOverride();
-            }
-            else {
+            } else {
                 marginFee = exchangeMetadata.getMarginFee();
             }
-        }
-        else {
+        } else {
             marginFee = null;
         }
 

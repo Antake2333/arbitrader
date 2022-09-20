@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   arbitrader:
-    image: agonyforge/arbitrader:latest
+    image: antake/arbitrader:latest
     tty: true
     ports:
       - "5005:5005"
