@@ -48,6 +48,7 @@ dependencies {
     implementation group: 'org.knowm.xchange', name: 'xchange-ftx', version: '5.0.13'
     implementation group: 'org.knowm.xchange', name: 'xchange-okex', version: '5.0.13'
     implementation group: 'org.knowm.xchange', name: 'xchange-ascendex', version: '5.0.13'
+    implementation group: 'org.knowm.xchange', name: 'xchange-gateio', version: '5.0.13'
     implementation group: 'org.knowm.xchange', name: 'xchange-stream-ftx', version: '5.0.13'
     implementation group: 'org.knowm.xchange', name: 'xchange-stream-binance', version: '5.0.13'
     //
